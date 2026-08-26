@@ -1,0 +1,14 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.tmp/
+*.pyc
+*.db
+jobs/
+node_modules/
+outputs/
+
+CHANGELOG.md

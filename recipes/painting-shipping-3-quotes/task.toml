@@ -1,0 +1,43 @@
+schema_version = "1.3"
+
+[task]
+name = "logistics/painting-shipping-quotes"
+description = "Contact qualified painting shippers, collect comparable quotes, and complete the supplied CSV tracker."
+authors = [{ name = "SFT.ai" }]
+keywords = ["logistics", "outreach", "shipping", "quotes", "contacts", "csv", "rewardkit", "judge-grading"]
+
+[metadata]
+checkpoint = "shipping-quote-retrieval"
+category = "real-world-logistics"
+difficulty = "hard"
+verifier_stage = 3
+verifier_purpose = "outbound-quote-retrieval-and-comparison"
+tracking_artifact = "completed-shipping-quote-tracker"
+
+[verifier]
+timeout_sec = 600.0
+
+[verifier.env]
+ANTHROPIC_API_KEY = "${ANTHROPIC_API_KEY}"
+
+[agent]
+timeout_sec = 1200.0
+network_mode = "public"
+
+[[environment.mcp_servers]]
+name = "sms"
+transport = "streamable-http"
+url = "http://sms:8000/mcp"
+
+[[environment.mcp_servers]]
+name = "email"
+transport = "streamable-http"
+url = "http://email:8000/mcp"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 10240
+allow_internet = true
+network_mode = "public"

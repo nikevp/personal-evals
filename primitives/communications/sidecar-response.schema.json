@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Communications sidecar response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "in_reply_to_message_id", "sender", "body", "action"],
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": ["reply", "no_reply"],
+      "description": "Use no_reply only when the task context instructs silence for this recipient; sender and body must then be null."
+    },
+    "in_reply_to_message_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sender": {
+      "anyOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["display_name", "address"],
+          "properties": {
+            "display_name": {"type": "string", "minLength": 1},
+            "address": {"type": "string", "minLength": 1},
+            "organization": {"type": "string", "minLength": 1}
+          }
+        }
+      ]
+    },
+    "body": {
+      "anyOf": [
+        {"type": "null"},
+        {"type": "string", "minLength": 1}
+      ]
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "data"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Either 'none' or one action name from the task context. The runtime rejects action names the task did not register."
+        },
+        "data": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

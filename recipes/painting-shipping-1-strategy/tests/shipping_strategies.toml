@@ -1,0 +1,52 @@
+[judge]
+judge = "anthropic/claude-sonnet-4-6"
+files = ["/logs/artifacts"]
+atif-trajectory = "/logs/agent/trajectory.json"
+timeout = 300
+reasoning_effort = "medium"
+prompt_template = "strategy_response_judge.md"
+
+[[criterion]]
+name = "shipment_packing_alternatives"
+description = """Assign only an integer score of 0, 1, or 2. Award one binary point for explicitly presenting the painting kept stretched and intact in a professional crate. Award one binary point for explicitly presenting removal from the stretcher and safe rolling to reduce the shipping form factor. Score 0 when neither is presented, 1 when either one is presented, and 2 only when both are presented; therefore crating alone earns half credit and full credit requires identifying rolling in addition to crating. Equivalent wording qualifies. A method earns its point when proposed, investigated, or reasonably rejected; a passing mention in copied background does not.
+
+If you are unsure about ambiguity, state how this prompt could be clearer."""
+type = "numeric"
+min = 0
+max = 2
+weight = 2.0
+
+[[criterion]]
+name = "logistics_approach_coverage"
+description = """Assign only an integer score from 0 through 4 by awarding one point for each distinct logistics approach explicitly presented in the final answer.
+
+Carrier Direct: the user or origin custodian releases the painting to an underlying transport carrier booked directly; naming a carrier without describing a direct-carriage path does not qualify.
+
+Sotheby's Quote: the existing auction-house-managed quote is treated as a live option, fallback, negotiation target, or request for a revised or itemized scope; merely repeating the approximately $3,000 background fact does not qualify.
+
+3P Reshipper: an independently arranged art packer, freight forwarder, reshipper, fine-art logistics provider, or other intermediary collects, packs, hands off, or manages the shipment.
+
+Self: the purchaser or a friend, family member, colleague, or other trusted personal contact travels to collect, holds, carries, or hands off the painting; flying to Hong Kong, self-pickup, passenger baggage, and hand-carry are equivalent qualifying evidence. A commercial courier, task service, freight forwarder, or owner coordination of vendors does not qualify as Self.
+
+Award at most one point for each of Carrier Direct, Sotheby's Quote, 3P Reshipper, and Self, even if the answer lists multiple vendors or variants within it. An approach may earn its point when investigated and reasonably rejected.
+
+If you are unsure about ambiguity, state how this prompt could be clearer."""
+type = "numeric"
+min = 0
+max = 4
+weight = 1.0
+
+[[criterion]]
+name = "grounded_feasibility_and_sequence"
+description = """Assign only an integer score of 0 or 1. Award one point when the final answer confirms, or explicitly proposes confirming, whether Sotheby's as the current custodian can assist with the rolled option. Qualifying evidence must connect Sotheby's to the rolled method, such as asking whether it can de-stretch and safely roll the painting, arrange that work, or release the painting to a handler who can do it. The confirmation can be a stated next step; do not require email access or a completed reply from Sotheby's. Score 0 when the answer does not address Sotheby's capability to support the rolled option, or when it assumes without confirmation that Sotheby's cannot assist.
+
+Do not award extra points for dimensions, risk, tariffs, storage, quote details, photographs, or other feasibility analysis in this criterion.
+
+If you are unsure about ambiguity, state how this prompt could be clearer."""
+type = "numeric"
+min = 0
+max = 1
+weight = 1.0
+
+[scoring]
+aggregation = "weighted_mean"

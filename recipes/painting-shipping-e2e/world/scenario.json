@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "clock": "2026-08-21T13:00:00+00:00",
+  "conversation_seeds": [
+    "/scenario/email.json",
+    "/scenario/user-sms.json"
+  ],
+  "accounts": {},
+  "conversations": [],
+  "world": {
+    "strategy": {
+      "approved": false,
+      "route": null
+    },
+    "quotes": {},
+    "payment_requests": [],
+    "fulfillment": {
+      "provider": null,
+      "status": "planning"
+    }
+  }
+}

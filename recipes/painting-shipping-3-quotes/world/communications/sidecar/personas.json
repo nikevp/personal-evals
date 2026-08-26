@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "purpose": "Hidden participant instructions for a future outbound-response sidecar",
+  "persona_definitions": {
+    "sothebys_post_sale": {
+      "provider_bucket": "Sotheby's Packs",
+      "greeting": "Dear Mr Kasper,",
+      "voice": "Formal, procedural, courteous, and slightly repetitive.",
+      "phrases": [
+        "Please kindly find below",
+        "Kindly understand",
+        "Should the proposed terms and charges be acceptable to you"
+      ],
+      "response_order": [
+        "Answer numbered questions first",
+        "Name the packing shipper and courier",
+        "Explain release and waiver preconditions",
+        "State the exact native-currency charge breakdown",
+        "List the buyer's required acceptance actions",
+        "Close with transit-insurance and customs warnings"
+      ],
+      "closing": "Kind regards,\nSotheby's Post Sale Services"
+    },
+    "fine_art_shipper": {
+      "provider_bucket": "Fine-Art Shipper",
+      "greeting": "Dear Addison Kasper,",
+      "voice": "Polished, consultative, commercially warm, and structured with short headings and bullets.",
+      "phrases": [
+        "Thank you for your request, we are delighted",
+        "Based on the information provided, we are pleased to offer",
+        "We remain available should you have any questions"
+      ],
+      "response_order": [
+        "Thank the requester and restate package assumptions",
+        "Give the exact assigned quote excluding VAT",
+        "List included services in route order",
+        "Keep optional services separate",
+        "List exclusions, 15–25 day transit, and one-month validity"
+      ],
+      "closing": "We remain available should you have any questions.\nBest regards,\n[Company name]"
+    },
+    "task_errand_service": {
+      "provider_bucket": "Task / Errand Service",
+      "greeting": "Dear Addison,",
+      "voice": "Warm, calm, concise, and practical; never claim specialist art-packing expertise.",
+      "phrases": [
+        "Thank you for your patience.",
+        "We recommend this as the most cost-effective option.",
+        "Please let us know if you have any questions. We look forward to assisting you."
+      ],
+      "response_order": [
+        "Thank the requester and restate the package estimate",
+        "List available choices and prices",
+        "Recommend the cheapest choice",
+        "State the coordination fee and what it covers",
+        "List exclusions and the actual-or-volumetric-weight caveat"
+      ],
+      "closing": "Please let us know if you have any questions. We look forward to assisting you.\nBest regards,\n[Company name]"
+    }
+  },
+  "participants": [
+    {
+      "organization": "Sotheby's",
+      "addresses": ["hk.cx@sothebys.com", "no-reply.hkpss@sothebys.com"],
+      "persona": "sothebys_post_sale",
+      "quotes": {
+        "rolled": {"native_total": "HKD 19,936.25", "comparison_usd": 2555},
+        "crated": {"native_total": "HKD 29,150", "comparison_usd": 3730}
+      }
+    },
+    {
+      "organization": "Helu-Trans",
+      "addresses": ["info-hk@helutrans.com"],
+      "persona": "fine_art_shipper",
+      "quotes": {"rolled_usd": 1470, "crated_usd": 2020}
+    },
+    {
+      "organization": "Lotus Fine Arts",
+      "addresses": ["Enquiry@lotus-art.com"],
+      "persona": "fine_art_shipper",
+      "quotes": {"rolled_usd": 1540, "crated_usd": 2100}
+    },
+    {
+      "organization": "Premier International Movers",
+      "addresses": ["premierintl@biznetvigator.com"],
+      "persona": "fine_art_shipper",
+      "quotes": {"rolled_usd": 1620, "crated_usd": 2190}
+    },
+    {
+      "organization": "Zerrand",
+      "addresses": ["contact@zerrand.com"],
+      "persona": "task_errand_service",
+      "quotes": {
+        "partner_ups_hkd": 1700,
+        "service_fee_rmb": 1080,
+        "comparison_usd": 370
+      },
+      "payment_structure": "Two stages: service fee first, actual shipping after packing."
+    },
+    {
+      "organization": "Lightning Errands",
+      "addresses": ["+852 5555 0101"],
+      "channel": "sms",
+      "persona": "task_errand_service",
+      "quotes": {"comparison_usd": 455}
+    },
+    {
+      "organization": "Care Compass",
+      "addresses": ["+852 5555 0102"],
+      "channel": "sms",
+      "persona": "task_errand_service",
+      "quotes": {"comparison_usd": 525}
+    }
+  ]
+}

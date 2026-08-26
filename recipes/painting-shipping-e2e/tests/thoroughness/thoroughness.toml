@@ -1,0 +1,31 @@
+[judge]
+judge = "claude-code"
+model = "claude-sonnet-4-6"
+atif-trajectory = "/logs/agent/trajectory.json"
+timeout = 600
+
+[[criterion]]
+name = "provider_outreach_coverage"
+description = """Assign only an integer score from 0 through 5. Award one point for each distinct outside provider that the agent actually contacted for a quote or coordination proposal, up to five points. Classify each contacted provider into one of three service bands using the request the agent sent and any quote recorded in the workspace file world-summary.json: a fine-art shipper (a request that plausibly covers professional packing or de-stretching and international shipment), a task or errand coordination service (a request that plausibly covers authorized Hong Kong collection, coordination with a separate qualified art packer, and carrier handoff), or a parcel carrier (a request to transport an already-packed rolled package, such as DHL or FedEx). Full credit requires outreach to at least two providers in the fine-art shipper band and at least two providers in the cheaper bands (parcel carrier or task/errand service, in any mix); the fifth point may come from any band. Sotheby's is evaluated separately and must not count as an outside-provider point. A draft, a bare company name, a fictional placeholder, a company that was researched but not contacted, or an attempt to treat a general runner or carrier as a professional art packer without confirmation does not count."""
+type = "numeric"
+min = 0
+max = 5
+weight = 2.0
+
+[[criterion]]
+name = "sothebys_roll_requote_sent"
+description = """Assign only an integer score from 0 through 3 after inspecting the trajectory. Award one point when the agent sends its request through the existing Sotheby's email conversation. Award one point when a sent message explicitly asks whether Sotheby's, its warehouse, or an appointed handler can evaluate, safely de-stretch, and roll the acrylic canvas. Award one point when a sent message asks Sotheby's to re-quote shipment using the rolled-package dimensions, asks for an unbundled price for the unframing and rolling work alone, or requests the third-party release process, which is an emailed approval from the owner naming the designated collecting company or person. A draft that is not sent earns zero."""
+type = "numeric"
+min = 0
+max = 3
+weight = 2.0
+
+[[criterion]]
+name = "negotiation"
+description = """Rate from 1 to 5 how effectively the agent used competition and negotiation to drive down the price band of the selected route. Use messages actually sent and quotes recorded in the `quotes` object of the workspace file world-summary.json as evidence; world-summary.json is authoritative for which quotes were actually received, and a price that appears only in narrative text must not be treated as a received quote. Strong evidence includes requesting comparable scopes from multiple providers, sharing a competing figure to ask for a better price or a best-and-final offer, unbundling packing from transport to unlock cheaper carriage, and negotiating fees or storage charges away. Judge the band selected, not exact dollar amounts: full credit requires selecting from the cheapest viable band the agent discovered, so choosing a substantially more expensive full-service option while holding a workable rolled-package carrier or task-service path plus a confirmed de-framing arrangement is a significant deduction. An agent that only ever solicited one service band cannot earn above 3 on this criterion."""
+type = "likert"
+points = 5
+weight = 2.0
+
+[scoring]
+aggregation = "weighted_mean"

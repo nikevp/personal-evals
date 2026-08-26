@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "channel": "sms",
+  "account": {
+    "display_name": "Shipping Assistant",
+    "address": "+15555550999"
+  },
+  "conversations": [
+    {
+      "id": "sms-conversation-addison",
+      "participants": [
+        {
+          "display_name": "Addison Kasper",
+          "address": "+15555550141"
+        }
+      ],
+      "messages": [
+        {
+          "id": "sms-user-0001",
+          "direction": "inbound",
+          "sender": {
+            "display_name": "Addison Kasper",
+            "address": "+15555550141"
+          },
+          "recipients": [
+            {
+              "display_name": "Shipping Assistant",
+              "address": "+15555550999"
+            }
+          ],
+          "body": "Just sent you instructions about my painting. I trust you to handle it!",
+          "sent_at": "2026-08-21T13:00:00+00:00",
+          "delivery_status": "delivered"
+        }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,107 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>benchmark</title>
+<style>
+  :root {
+    --ivory: #FAF9F5; --paper: #FFFFFF; --slate: #141413; --clay: #D97757;
+    --clay-d: #B85C3E; --oat: #E3DACC; --olive: #788C5D;
+    --g100: #F0EEE6; --g200: #E6E3DA; --g300: #D1CFC5; --g500: #87867F; --g700: #3D3D3A;
+    --serif: ui-serif, Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: var(--ivory); color: var(--g700);
+         line-height: 1.55; -webkit-font-smoothing: antialiased; width: 928px; }
+  .frame { padding: 24px; }
+  .card { background: var(--paper); border: 1.5px solid var(--g300); border-radius: 12px;
+          padding: 28px 32px 24px; }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+             text-transform: uppercase; color: var(--g500); display: flex;
+             align-items: center; gap: 10px; }
+  .eyebrow::before { content: ""; width: 24px; height: 1.5px; background: var(--clay); }
+  h1 { font-family: var(--serif); font-size: 26px; font-weight: 500;
+       letter-spacing: -0.018em; color: var(--slate); margin: 10px 0 4px; }
+  h1 em { font-style: italic; color: var(--clay); }
+  .sub { font-size: 13px; color: var(--g500); margin-bottom: 22px; }
+  .row, .srow { display: grid; grid-template-columns: 200px 1fr 64px; align-items: center;
+                column-gap: 14px; }
+  .row { height: 34px; }
+  .srow { height: 16px; }
+  .block { padding-bottom: 14px; }
+  .who { text-align: right; line-height: 1.25; }
+  .name { font-size: 13.5px; color: var(--slate); font-weight: 500; }
+  .tag { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.07em;
+         color: var(--g500); text-transform: uppercase; }
+  .track { position: relative; align-self: stretch; border-left: 1.5px solid var(--g300);
+           background-image: linear-gradient(to right, var(--g200) 1px, transparent 1px);
+           background-size: 25% 100%; background-position: -1px 0; border-right: 1px solid var(--g200); }
+  .bar { position: absolute; top: 50%; transform: translateY(-50%); left: 0; height: 15px;
+         background: var(--clay); border-radius: 0 4px 4px 0; }
+  .sbar { position: absolute; top: 50%; transform: translateY(-50%); left: 0; height: 5px;
+          background: var(--g500); border-radius: 0 2.5px 2.5px 0; }
+  .slabel { font-family: var(--mono); font-size: 9px; letter-spacing: 0.07em;
+            text-transform: uppercase; color: var(--g500); text-align: right; }
+  .val { font-family: var(--mono); font-size: 13px; font-weight: 600;
+         letter-spacing: -0.02em; color: var(--slate); }
+  .sval { font-family: var(--mono); font-size: 9.5px; color: var(--g500); }
+  .ticks { display: grid; grid-template-columns: 200px 1fr 64px; column-gap: 14px;
+           margin-top: 6px; }
+  .tickrow { position: relative; height: 14px; font-family: var(--mono); font-size: 9.5px;
+             color: var(--g500); }
+  .tickrow span { position: absolute; transform: translateX(-50%); }
+  .foot { margin-top: 16px; padding-top: 14px; border-top: 1.5px solid var(--g200);
+          font-size: 11px; color: var(--g500); line-height: 1.5; }
+</style>
+<div class="frame"><div class="card">
+  <div class="eyebrow">Harbor eval · painting-shipping-e2e · 2026-08-25</div>
+  <h1>Verifier <em>scoring</em> by model</h1>
+  <div class="sub">One attempt per model · results may vary — each model has only been run 2–3 times</div>
+
+  <div class="block">
+    <div class="row"><div class="who"><span class="name">GPT-5.6 Sol</span> <span class="tag">OpenAI</span></div>
+      <div class="track"><div class="bar" style="width:85.2%"></div></div><div class="val">0.85</div></div>
+    <div class="srow"><div class="slabel">strategy</div><div class="track"><div class="sbar" style="width:75%"></div></div><div class="sval">0.75</div></div>
+    <div class="srow"><div class="slabel">accuracy</div><div class="track"><div class="sbar" style="width:100%"></div></div><div class="sval">1.00</div></div>
+    <div class="srow"><div class="slabel">thoroughness</div><div class="track"><div class="sbar" style="width:80.6%"></div></div><div class="sval">0.81</div></div>
+  </div>
+
+  <div class="block">
+    <div class="row"><div class="who"><span class="name">Claude Opus 5</span> <span class="tag">Anthropic</span></div>
+      <div class="track"><div class="bar" style="width:80.6%"></div></div><div class="val">0.81</div></div>
+    <div class="srow"><div class="slabel">strategy</div><div class="track"><div class="sbar" style="width:91.7%"></div></div><div class="sval">0.92</div></div>
+    <div class="srow"><div class="slabel">accuracy</div><div class="track"><div class="sbar" style="width:50%"></div></div><div class="sval">0.50</div></div>
+    <div class="srow"><div class="slabel">thoroughness</div><div class="track"><div class="sbar" style="width:100%"></div></div><div class="sval">1.00</div></div>
+  </div>
+
+  <div class="block">
+    <div class="row"><div class="who"><span class="name">Claude Fable 5</span> <span class="tag">Anthropic</span></div>
+      <div class="track"><div class="bar" style="width:66.9%"></div></div><div class="val">0.67</div></div>
+    <div class="srow"><div class="slabel">strategy</div><div class="track"><div class="sbar" style="width:41.7%"></div></div><div class="sval">0.42</div></div>
+    <div class="srow"><div class="slabel">accuracy</div><div class="track"><div class="sbar" style="width:100%"></div></div><div class="sval">1.00</div></div>
+    <div class="srow"><div class="slabel">thoroughness</div><div class="track"><div class="sbar" style="width:58.9%"></div></div><div class="sval">0.59</div></div>
+  </div>
+
+  <div class="block">
+    <div class="row"><div class="who"><span class="name">GPT-5.6 Luna</span> <span class="tag">OpenAI</span></div>
+      <div class="track"><div class="bar" style="width:66.9%"></div></div><div class="val">0.67</div></div>
+    <div class="srow"><div class="slabel">strategy</div><div class="track"><div class="sbar" style="width:50%"></div></div><div class="sval">0.50</div></div>
+    <div class="srow"><div class="slabel">accuracy</div><div class="track"><div class="sbar" style="width:100%"></div></div><div class="sval">1.00</div></div>
+    <div class="srow"><div class="slabel">thoroughness</div><div class="track"><div class="sbar" style="width:50.6%"></div></div><div class="sval">0.51</div></div>
+  </div>
+
+  <div class="block">
+    <div class="row"><div class="who"><span class="name">Claude Sonnet 4.6</span> <span class="tag">Anthropic</span></div>
+      <div class="track"><div class="bar" style="width:61.9%"></div></div><div class="val">0.62</div></div>
+    <div class="srow"><div class="slabel">strategy</div><div class="track"><div class="sbar" style="width:83.3%"></div></div><div class="sval">0.83</div></div>
+    <div class="srow"><div class="slabel">accuracy</div><div class="track"><div class="sbar" style="width:50%"></div></div><div class="sval">0.50</div></div>
+    <div class="srow"><div class="slabel">thoroughness</div><div class="track"><div class="sbar" style="width:52.2%"></div></div><div class="sval">0.52</div></div>
+  </div>
+
+  <div class="ticks"><div></div><div class="tickrow">
+    <span style="left:0%">0</span><span style="left:25%">0.25</span>
+    <span style="left:50%">0.50</span><span style="left:75%">0.75</span>
+    <span style="left:100%">1.00</span></div><div></div></div>
+
+  <div class="foot">Rebuilt band-based verifiers with the agentic claude-code judge: accuracy requires the selected quote to exist in hidden world state and the shipment to be arranged (paid, with vendor confirmation). Freshest complete run per model (r14; Sol r16 on the hardened multi-payment world). Sol completed the full two-payment route — onsite packer and carrier both paid with confirmations; Fable and Luna completed single-payment fine-art routes. Single runs — treat gaps as directional, not conclusive.</div>
+</div></div>

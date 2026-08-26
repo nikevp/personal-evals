@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "channel": "email",
+  "account": {
+    "display_name": "Addison Kasper",
+    "address": "addison.kasper@ymail.com"
+  },
+  "conversations": [
+    {
+      "id": "email-conversation-sothebys-hk1740",
+      "subject": "Invoice | sale HK1740 - 63827145 | Modern & Contemporary Discoveries",
+      "participants": [
+        {
+          "display_name": "Sotheby's Client Experience",
+          "address": "hk.cx@sothebys.com",
+          "organization": "Sotheby's"
+        }
+      ],
+      "messages": [
+        {
+          "id": "email-msg-0001",
+          "direction": "inbound",
+          "sender": {
+            "display_name": "Sotheby's Hong Kong Post Sale Services",
+            "address": "no-reply.hkpss@sothebys.com",
+            "organization": "Sotheby's"
+          },
+          "recipients": [
+            {
+              "display_name": "Addison Kasper",
+              "address": "addison.kasper@ymail.com"
+            }
+          ],
+          "body": "Dear Mr Kasper,\n\nCongratulations on your recent purchase from Sotheby's Hong Kong in Modern & Contemporary Discoveries sale on 4 - 10 June 2026.\n\nWe hope you are delighted with your acquisition and that this purchase brings you great enjoyment as you continue to build your collection.\n\nPayment\n\nNow that the sale has concluded, please sign in to your account to complete payment at your earliest convenience and to avoid any interest charges. For invoices below a certain threshold, details of a scheduled payment will be sent to you separately by email.\n\nShipping and Collection\n\nYou can request a shipment or schedule a collection appointment while checking out online. Once payment and any required documentation are received, your purchase will be prepared and available for release within three business days.\n\nIf you prefer, Sotheby's can continue to store your items for an extended period; however, please be aware that late collection fees may apply.\n\nWarm regards,\nThe Sotheby's Team\nHK.CX@sothebys.com",
+          "sent_at": "2026-06-10T05:29:00-04:00",
+          "delivery_status": "delivered"
+        },
+        {
+          "id": "email-msg-0002",
+          "direction": "inbound",
+          "sender": {
+            "display_name": "Elena",
+            "address": "hk.cx@sothebys.com",
+            "organization": "Sotheby's"
+          },
+          "recipients": [
+            {
+              "display_name": "Addison Kasper",
+              "address": "addison.kasper@ymail.com"
+            }
+          ],
+          "body": "Dear Mr Kasper,\n\nThank you for your support at Sotheby's and we are happy to confirm the receipt of your payment for your HK1740 purchase.\n\nPlease note your property is now stored at the below off-site warehouse:\n\nHELU-TRANS (HK) PTE LTD\nUNIT 1102, 11TH FLOOR, GLOBAL GATEWAY BUILDING\n168 YEUNG UK ROAD, TSUEN WAN, HONG KONG\nMONDAY - FRIDAY: 10am - 12:00pm, 2:00pm - 5pm, except for public holidays\n\nFor items stored at our off-site warehouse, please note that we require at least two working days' notice to prepare for release.\n\nIf you would like to authorize a third party to collect your property, please reply to this email with your written approval stating the name of the designated company or person as soon as possible, and we will arrange the release accordingly. No form or signature is required.\n\nAlternatively, if you would like the property delivered to your premises, please provide the full delivery address and we will provide a shipping quote for your consideration once available.\n\nGentle reminder that all purchased lot(s) not collected within 30 calendar days from the date of the auction will be subject to late collection fees. We highly recommend arranging for the release of your property as soon as possible to avoid incurring these fees.\n\nPlease note that the fees comprise a one-time handling fee and a daily late collection fee at specific rates based on the property's dimensions.\n\nShould we be of further assistance, please do not hesitate to contact us.\n\nBest regards,\nElena\nClient Experience Coordinator",
+          "sent_at": "2026-06-12T02:26:00-04:00",
+          "delivery_status": "delivered"
+        },
+        {
+          "id": "email-msg-0003",
+          "direction": "outbound",
+          "sender": {
+            "display_name": "Addison Kasper",
+            "address": "addison.kasper@ymail.com"
+          },
+          "recipients": [
+            {
+              "display_name": "Sotheby's Client Experience",
+              "address": "hk.cx@sothebys.com",
+              "organization": "Sotheby's"
+            }
+          ],
+          "body": "Hi Elena,\n\nI would like to receive a shipping quote. Address:\n\n1 Whitehall Way\nPalm Beach, FL 33480\nUnited States\n\nBest,\nAddison\n\nSent from my iPhone",
+          "sent_at": "2026-06-12T10:20:00-04:00",
+          "delivery_status": "sent"
+        },
+        {
+          "id": "email-msg-0004",
+          "direction": "inbound",
+          "sender": {
+            "display_name": "Elena",
+            "address": "hk.cx@sothebys.com",
+            "organization": "Sotheby's"
+          },
+          "recipients": [
+            {
+              "display_name": "Addison Kasper",
+              "address": "addison.kasper@ymail.com"
+            }
+          ],
+          "body": "Dear Mr Kasper,\n\nThank you for your email and for providing us with the delivery address.\n\nWe are currently checking with our shipper and will provide you with a shipping quote once available for your consideration.\n\nShould we be of further assistance, please do not hesitate to contact us.\n\nBest regards,\nElena\nClient Experience Coordinator",
+          "sent_at": "2026-06-15T06:15:00-04:00",
+          "delivery_status": "delivered"
+        },
+        {
+          "id": "email-msg-0005",
+          "direction": "inbound",
+          "sender": {
+            "display_name": "Miriam",
+            "address": "hk.cx@sothebys.com",
+            "organization": "Sotheby's"
+          },
+          "recipients": [
+            {
+              "display_name": "Addison Kasper",
+              "address": "addison.kasper@ymail.com"
+            }
+          ],
+          "body": "Dear Mr Kasper,\n\nFurther to our earlier correspondence, please find below your custom shipping quote for your property.\n\nQuote details\n\n- Account number: 63827145\n- Quote number: 62840177\n- Quote date: 16 June 2026\n- Valid until: 28 June 2026\n- Collection location: Hong Kong\n- Delivery destination: 1 Whitehall Way, Palm Beach, FL 33480, United States\n- Total items: 1\n- Total property value: HKD 15,600.00\n- Shipping: HKD 28,250.00\n- Transit risk: HKD 900.00\n- Total cost: HKD 29,150.00\n\nThe shipping charge includes collection, professional packing, documentation, handling and courier transport. Delivery is to the kerbside or building entrance. Placing the property inside the premises and unpacking are not included.\n\nThe transit-risk charge provides standard liability cover up to the total property value, with a deductible of HKD 5,000 per occurrence in the event of a claim.\n\nProperty included\n\n- Sale: Modern & Contemporary Discoveries, HK1740\n- Lot: 5902\n- Artist: Nobuaki Takekawa\n- Work: Future Version of the Crab and Monkey T.I.W.D.L.L.\n- Medium: Acrylic on canvas\n- Dimensions: 130 x 4 x 163 cm\n- Department: Contemporary Art\n- Transit value: HKD 15,600.00\n\nWritten approval of this shipping quote via email with the delivery contact name and phone number, for all shipping of items valued in aggregate at less than HKD 10,000,000 other than where you are self-insured, will constitute acceptance of all terms and conditions contained herein.\n\nFor all other shipping and/or all shipping where you are self-insured and wish to opt out of transit insurance, please confirm by reply email with the delivery contact name and phone number that you do not wish to include transit insurance. By confirming your agreement to the terms and conditions contained herein and that you do not wish to include transit insurance, you acknowledge that any loss or damage occurring during transit is at your own risk.\n\nPlease note that any import customs charges, duty, VAT and import formalities are excluded and would be the responsibility of the consignee.\n\nPlease note that the US Government has imposed tariffs on certain products and shipments from outside the US. Any enquiries regarding applicable exclusions should be discussed with your tax adviser or customs broker before arranging shipment to the US. Tariffs are not included in our shipping quote and shall be settled at customs clearance.\n\nYou may log in to your Sotheby's account to settle the shipping charge by Amex, Mastercard or Visa credit card. Once logged in, please click on 'My Account' and look for the 'Invoices' tab to select the open invoice for settlement.\n\nAs soon as your payment is received and processed, we will notify you of the delivery schedule once available.\n\nGentle reminder that all purchased lot(s) not collected within 30 calendar days from the date of the auction will be subject to late collection fees.\n\nRegards,\nMiriam\nClient Experience Coordinator",
+          "sent_at": "2026-06-16T02:02:00-04:00",
+          "delivery_status": "delivered"
+        }
+      ]
+    }
+  ]
+}

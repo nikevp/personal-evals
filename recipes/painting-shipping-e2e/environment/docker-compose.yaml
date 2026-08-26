@@ -1,0 +1,33 @@
+services:
+  main:
+    depends_on:
+      communications:
+        condition: service_healthy
+
+  communications:
+    build:
+      context: ../../../primitives/communications
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      SIDECAR_CONTEXT_PATH: /scenario/sidecar/context.md
+      SIDECAR_EXTENSION_PATH: /app/logistics.py
+      SIDECAR_MODEL: ${SIDECAR_MODEL:-claude-sonnet-4-6}
+      SIDECAR_QUOTE_RANGES_PATH: /scenario/sidecar/quote-ranges.json
+      SIDECAR_QUOTE_SEED: ${SIDECAR_QUOTE_SEED:-0}
+      WORLD_ACTIONS_PATH: /scenario/sidecar/actions.py
+      WORLD_SCENARIO_PATH: /scenario/scenario.json
+      WORLD_STATE_PATH: /state/world.json
+    expose:
+      - "8000"
+    volumes:
+      - ../world:/scenario:ro
+      - interaction-world-state:/state
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; socket.create_connection(('localhost',8000),timeout=2).close()"]
+      interval: 2s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
+
+volumes:
+  interaction-world-state:

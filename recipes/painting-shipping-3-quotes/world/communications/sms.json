@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "channel": "sms",
+  "account": {
+    "display_name": "Addison Kasper",
+    "address": "+15555550141"
+  },
+  "conversations": [
+    {
+      "id": "sms-conversation-fishing",
+      "participants": [
+        {
+          "display_name": "Jamie Park",
+          "address": "+15555550187"
+        }
+      ],
+      "messages": [
+        {
+          "id": "sms-msg-0001",
+          "direction": "inbound",
+          "sender": {
+            "display_name": "Jamie Park",
+            "address": "+15555550187"
+          },
+          "recipients": [
+            {
+              "display_name": "Addison Kasper",
+              "address": "+15555550141"
+            }
+          ],
+          "body": "I am going fishing at Lake Mercer on Saturday morning. Do you want to come?",
+          "sent_at": "2026-08-18T14:12:00+00:00",
+          "delivery_status": "delivered"
+        },
+        {
+          "id": "sms-msg-0002",
+          "direction": "outbound",
+          "sender": {
+            "display_name": "Addison Kasper",
+            "address": "+15555550141"
+          },
+          "recipients": [
+            {
+              "display_name": "Jamie Park",
+              "address": "+15555550187"
+            }
+          ],
+          "body": "Yes. What time should I meet you there?",
+          "sent_at": "2026-08-18T14:18:00+00:00",
+          "delivery_status": "sent"
+        }
+      ]
+    }
+  ]
+}

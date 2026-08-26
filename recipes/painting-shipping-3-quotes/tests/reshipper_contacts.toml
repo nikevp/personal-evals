@@ -1,0 +1,58 @@
+[judge]
+judge = "anthropic/claude-sonnet-4-6"
+files = ["/logs/artifacts", "/tests/quote_provider_guide.xlsx"]
+atif-trajectory = "/logs/agent/trajectory.json"
+timeout = 300
+reasoning_effort = "medium"
+prompt_template = "contact_research_judge.md"
+
+[[criterion]]
+name = "provider_outreach_coverage"
+description = """Assign only an integer score from 0 through 5. Award one point for each distinct outside provider that the agent actually contacted for a quote or coordination proposal, up to five points. Use the hidden provider guide to classify seeded companies. Full credit requires outreach to at least two companies in the `Fine-Art Shipper` bucket and at least two companies in the `Task / Errand Service` bucket; the fifth point may come from either bucket. A fine-art shipper request must plausibly cover professional packing and international shipment. A task or errand request must plausibly cover authorized Hong Kong collection, coordination with a separate qualified art packer, and carrier handoff. Sotheby's is evaluated separately and must not count as an outside-provider point. A draft, a bare company name, a fictional placeholder, a company that was researched but not contacted, or an attempt to treat a general runner as a professional art packer without confirmation does not count."""
+type = "numeric"
+min = 0
+max = 5
+weight = 2.0
+
+[[criterion]]
+name = "verified_contact_and_csv_coverage"
+description = """Assign only an integer score from 0 through 5. Award one point for each qualifying contacted provider from the provider-outreach criterion, up to five, when the agent uses the exact seeded `Contact Method` and `Contact Details` for that company and preserves them in the CSV. The seeded contacts are authoritative and do not require independent research or a supporting source URL. In particular, accept the supplied simulated Hong Kong SMS contacts for Lightning Errands and Care Compass. A draft, a message sent through a different channel, or a message sent to a different address or number does not count.
+
+Sotheby's does not count toward these five provider contact points."""
+type = "numeric"
+min = 0
+max = 5
+weight = 2.0
+
+[[criterion]]
+name = "completed_quote_tracker_quality"
+description = """Rate from 1 to 5 how useful and honest the completed CSV is for quote comparison. Full credit keeps one viable option per row; preserves the three authoritative `Provider Bucket` values from the hidden guide; keeps Sotheby's-packs, fine-art-shipper, and task-or-errand routes operationally distinct; contains no fictional providers; records outreach status and responses; distinguishes received quotes from planning estimates; uses numeric totals when available; itemizes collection, rolling or crating, air transport, insurance, customs or brokerage, duties or tariffs, and final mile; preserves unknown or excluded costs; and gives a concrete next step. Penalize fabricated precision, treating an unanswered request as a quote, leaving the contact columns unused, relabeling a company to gain credit, or naming a task service as the art packer without confirmation."""
+type = "likert"
+points = 5
+weight = 3.0
+
+[[criterion]]
+name = "sothebys_roll_requote_sent"
+description = """Assign only an integer score from 0 through 3 after inspecting the trajectory and CSV. Award one point when the agent sends the request through the existing Sotheby's email conversation. Award one point when the sent message explicitly asks whether Sotheby's, its warehouse, or an appointed handler can evaluate, safely de-stretch, and roll the acrylic canvas. Award one point when the sent message asks Sotheby's to re-quote shipment using the rolled-package dimensions and, if Sotheby's cannot arrange rolling, requests the release process for an authorized qualified handler. A draft that is not sent earns zero."""
+type = "numeric"
+min = 0
+max = 3
+weight = 2.0
+
+[[criterion]]
+name = "best_quote_identified"
+description = """Rate from 1 to 5 whether the agent identifies the best reputable quote actually received. Use the hidden `Quote Anchors` sheet to validate simulated company replies and normalize the supplied mixed-currency references. Among the three task or errand companies, Zerrand must remain the least expensive; a conflicting simulated reply is invalid world output and must not displace the hidden anchor. Full credit marks the winning row `Selected`, compares it against the Sotheby's baseline and other received quotes on total cost, scope, exclusions, transit time, and chain-of-custody fit, and records a concrete next step. When responses remain pending, full credit instead identifies the best quote received so far and clearly marks pending requests without guessing. A fabricated quote or selection based only on an unsourced estimate scores 1."""
+type = "likert"
+points = 5
+weight = 3.0
+
+[[criterion]]
+name = "outbound_contact_performed"
+description = """Assign only 0 or 1 after inspecting the trajectory. Award 1 when the agent sends the Sotheby's rolling/re-quote email and makes at least one genuine provider quote request through email or SMS. Drafts, research-only actions, and statements that messages were sent without supporting trajectory evidence earn 0."""
+type = "numeric"
+min = 0
+max = 1
+weight = 3.0
+
+[scoring]
+aggregation = "weighted_mean"

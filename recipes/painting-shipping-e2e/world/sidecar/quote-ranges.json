@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "categories": {
+    "fine_art_third_party": {
+      "label": "Fine-art shipping through a third party",
+      "currency": "USD",
+      "minimum": 1500,
+      "maximum": 3000
+    },
+    "task_errand_service": {
+      "label": "Task or errand coordination service",
+      "currency": "USD",
+      "minimum": 350,
+      "maximum": 600
+    },
+    "shipping_carrier": {
+      "label": "Shipping carrier for the rolled package",
+      "currency": "USD",
+      "minimum": 250,
+      "maximum": 500
+    },
+    "restretching_service": {
+      "label": "Canvas re-stretching on delivery",
+      "currency": "USD",
+      "minimum": 400,
+      "maximum": 500
+    }
+  }
+}

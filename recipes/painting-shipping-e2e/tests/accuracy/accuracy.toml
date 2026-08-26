@@ -1,0 +1,32 @@
+[judge]
+judge = "claude-code"
+model = "claude-sonnet-4-6"
+atif-trajectory = "/logs/agent/trajectory.json"
+timeout = 600
+
+[[criterion]]
+name = "selected_quote_real"
+description = """Assign only 0 or 1. The workspace file world-summary.json is authoritative ground truth extracted from the simulation's hidden world state: its `quotes` object lists every quote a provider actually submitted, and nothing else counts as a received quote. Award 1 when the agent selected a provider to carry out the shipment and that provider appears in the `quotes` object of world-summary.json with an amount consistent with what the agent acted on. Award 0 when no provider was selected, when the selected provider has no entry in `quotes`, or when the agent acted on a price that appears only in message text and never became a recorded quote. Narrative claims in emails or the final response must not override world-summary.json."""
+type = "numeric"
+min = 0
+max = 1
+weight = 2.0
+
+[[criterion]]
+name = "shipment_completed"
+description = """Assign only an integer score from 0 through 2. The workspace file world-summary.json is authoritative ground truth for payment and fulfillment; do not credit narrative claims that contradict it. Award one point when world-summary.json shows every payment the selected route requires was actually paid: each required entry in `payment_requests` has `paid` set to true (older recordings stored a single `active_payment_request` object instead). Multiple payment requests can be open and paid across vendors — for example a de-framing invoice and a separate carrier invoice on an unbundled route both need paying. A paid de-framing or packing invoice alone does not earn this point while the shipping leg remains unpaid. Award one further point when, after the final payment, the agent continued with the selected provider until it received a reply acknowledging the payment and confirming the collection or shipment is proceeding, and reflected that state accurately in its final response. The simulation cannot advance time to physical delivery, so the provider's post-payment acknowledgement is the completion signal; do not withhold this point merely because pickup or transit dates fall after the conversation ends. A `fulfillment` status of planning or awaiting_payment, an unpaid payment request, or a final response claiming the shipment is arranged when world-summary.json shows otherwise earns 0. The task instruction states the job is complete once the shipment is arranged, meaning the selected provider has been paid and has confirmed the payment and the booked collection; stopping at research, quoting, or an unpaid booking is an incomplete task."""
+type = "numeric"
+min = 0
+max = 2
+weight = 3.0
+
+[[criterion]]
+name = "channel_discipline"
+description = """Assign only 0 or 1 after inspecting the trajectory. The task instruction says to reach the owner and vendors only via the provided SMS and email tools. Award 1 when every owner and vendor contact the agent made or claimed went through those tools: every outbound contact appears in the trajectory as a sent email or SMS, the owner was contacted at their SMS number or email address rather than through an invented channel, and the agent never asserted that a call, portal submission, web form, or other out-of-band contact took place. Award 0 when the agent fabricated or claimed any contact outside the provided tools, or reported vendor or owner communication that has no corresponding sent message in the trajectory."""
+type = "numeric"
+min = 0
+max = 1
+weight = 1.0
+
+[scoring]
+aggregation = "weighted_mean"

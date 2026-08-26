@@ -1,0 +1,147 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>savings-segmented</title>
+<style>
+  :root {
+    --ivory: #FAF9F5; --paper: #FFFFFF; --slate: #141413; --clay: #D97757;
+    --clay-d: #B85C3E; --oat: #E3DACC; --olive: #788C5D;
+    --g100: #F0EEE6; --g200: #E6E3DA; --g300: #D1CFC5; --g500: #87867F; --g700: #3D3D3A;
+    --seg-deframe: #2a78d6; --seg-coord: #eb6834; --seg-ship: #1baf7a;
+    --seg-full: #1baf7a; --seg-restretch: #eda100; --seg-import: #e87ba4;
+    --seg-quote: #d03b3b;
+    --serif: ui-serif, Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: var(--ivory); color: var(--g700);
+         line-height: 1.55; -webkit-font-smoothing: antialiased; width: 928px; }
+  .frame { padding: 24px; }
+  .card { background: var(--paper); border: 1.5px solid var(--g300); border-radius: 12px;
+          padding: 28px 32px 24px; }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+             text-transform: uppercase; color: var(--g500); display: flex;
+             align-items: center; gap: 10px; }
+  .eyebrow::before { content: ""; width: 24px; height: 1.5px; background: var(--clay); }
+  h1 { font-family: var(--serif); font-size: 26px; font-weight: 500;
+       letter-spacing: -0.018em; color: var(--slate); margin: 10px 0 4px; }
+  h1 em { font-style: italic; color: var(--clay); }
+  .sub { font-size: 13px; color: var(--g500); margin-bottom: 14px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 18px; }
+  .chip { display: flex; align-items: center; gap: 6px; font-family: var(--mono);
+          font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase;
+          color: var(--g500); }
+  .chip i { width: 10px; height: 10px; border-radius: 3px; display: block; }
+  .chip i.dashed { background: transparent; border: 1.5px dashed var(--olive); }
+  .row { display: grid; grid-template-columns: 190px 1fr 104px; align-items: center;
+         column-gap: 14px; height: 46px; }
+  .who { text-align: right; line-height: 1.25; }
+  .name { font-size: 13.5px; color: var(--slate); font-weight: 500; }
+  .tag { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.06em;
+         color: var(--g500); text-transform: uppercase; }
+  .tag .gold { color: var(--clay-d); font-weight: 700; }
+  .track { position: relative; align-self: stretch; border-left: 1.5px solid var(--g300); }
+  .grid { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--g200); }
+  .seg { position: absolute; top: 50%; transform: translateY(-50%); height: 16px;
+         border-right: 2px solid var(--paper); font-family: var(--mono);
+         font-size: 8.5px; line-height: 16px; text-align: center; color: #fff;
+         overflow: hidden; }
+  .seg.ink { color: var(--slate); }
+  .seg.last { border-right: none; border-radius: 0 4px 4px 0; }
+  .seg.quotebar { background: var(--seg-quote); border-radius: 0 4px 4px 0;
+                  color: #fff; font-size: 9.5px;
+                  text-align: right; padding-right: 10px; }
+  .saved { position: absolute; top: 50%; transform: translateY(-50%); height: 16px;
+           border: 1.5px dashed var(--olive); border-left: none; border-radius: 0 4px 4px 0;
+           font-family: var(--mono); font-size: 9.5px; color: var(--olive);
+           display: flex; align-items: center; justify-content: center; }
+  .val { font-family: var(--mono); font-size: 13px; font-weight: 600;
+         letter-spacing: -0.02em; color: var(--slate); }
+  .val small { display: block; font-size: 9.5px; font-weight: 400; color: var(--g500); }
+  .pending { font-family: var(--mono); font-size: 10px; font-style: italic;
+             color: var(--g500); position: absolute; top: 50%;
+             transform: translateY(-50%); left: 10px; }
+  .ticks { display: grid; grid-template-columns: 190px 1fr 104px; column-gap: 14px;
+           margin-top: 6px; }
+  .tickrow { position: relative; height: 14px; font-family: var(--mono); font-size: 9.5px;
+             color: var(--g500); }
+  .tickrow span { position: absolute; transform: translateX(-50%); }
+  .foot { margin-top: 16px; padding-top: 14px; border-top: 1.5px solid var(--g200);
+          font-size: 11px; color: var(--g500); line-height: 1.5; }
+</style>
+<div class="frame"><div class="card">
+  <div class="eyebrow">Harbor eval · painting-shipping-e2e · 2026-08-25</div>
+  <h1>Estimated <em>savings</em> realized by model</h1>
+  <div class="sub">A rough estimate of what I’d expect each model to save me based on its eval results</div>
+
+  <div class="legend">
+    <span class="chip"><i style="background:var(--seg-deframe)"></i>De-framing</span>
+    <span class="chip"><i style="background:var(--seg-coord)"></i>Coordination</span>
+    <span class="chip"><i style="background:var(--seg-ship)"></i>Shipping / full service</span>
+    <span class="chip"><i style="background:var(--seg-restretch)"></i>Re-stretching</span>
+    <span class="chip"><i style="background:var(--seg-import)"></i>Import fees</span>
+    <span class="chip"><i class="dashed"></i>Saved</span>
+  </div>
+
+  <!-- axis 0 -> $3,870.86 · gridlines $1k 25.83% · $2k 51.67% · $3k 77.5% · sorted by savings desc -->
+  <div class="row"><div class="who"><span class="name">Addison (human)</span><br><span class="tag">Task service route · <span class="gold">actuals</span></span></div>
+    <div class="track"><div class="grid" style="left:25.83%"></div><div class="grid" style="left:51.67%"></div><div class="grid" style="left:77.5%"></div>
+      <div class="seg" style="left:0; width:4.94%; background:var(--seg-deframe)"></div>
+      <div class="seg" style="left:4.94%; width:4.15%; background:var(--seg-coord)"></div>
+      <div class="seg ink" style="left:9.09%; width:6.73%; background:var(--seg-ship)">$260</div>
+      <div class="seg ink" style="left:15.82%; width:11.39%; background:var(--seg-restretch)">$441</div>
+      <div class="seg last" style="left:27.21%; width:0.80%; background:var(--seg-import)"></div>
+      <div class="saved" style="left:28.01%; width:71.99%">saved $2,786 · 72%</div></div>
+    <div class="val">$2,786<small>cost $1,084</small></div></div>
+
+  <div class="row"><div class="who"><span class="name">GPT-5.6 Sol</span><br><span class="tag">Packer + carrier · <span class="paid">paid</span></span></div>
+    <div class="track"><div class="grid" style="left:25.83%"></div><div class="grid" style="left:51.67%"></div><div class="grid" style="left:77.5%"></div>
+      <div class="seg ink" style="left:0; width:12.27%; background:var(--seg-coord)">$475</div>
+      <div class="seg ink" style="left:12.27%; width:9.69%; background:var(--seg-ship)">$375</div>
+      <div class="seg ink" style="left:21.96%; width:11.39%; background:var(--seg-restretch)">$441</div>
+      <div class="seg last" style="left:33.35%; width:0.80%; background:var(--seg-import)"></div>
+      <div class="saved" style="left:34.15%; width:65.85%">saved $2,549 · 66%</div></div>
+    <div class="val">$2,549<small>cost $1,322</small></div></div>
+
+  <div class="row"><div class="who"><span class="name">GPT-5.6 Luna</span><br><span class="tag">Fine-art crated · paid</span></div>
+    <div class="track"><div class="grid" style="left:25.83%"></div><div class="grid" style="left:51.67%"></div><div class="grid" style="left:77.5%"></div>
+      <div class="seg ink" style="left:0; width:58.13%; background:var(--seg-full)">full service $2,250</div>
+      <div class="seg last" style="left:58.13%; width:0.80%; background:var(--seg-import)"></div>
+      <div class="saved" style="left:58.93%; width:41.07%">saved $1,590 · 41%</div></div>
+    <div class="val">$1,590<small>cost $2,281</small></div></div>
+
+  <div class="row"><div class="who"><span class="name">Claude Sonnet 4.6</span><br><span class="tag">Fine-art crated · quoted</span></div>
+    <div class="track"><div class="grid" style="left:25.83%"></div><div class="grid" style="left:51.67%"></div><div class="grid" style="left:77.5%"></div>
+      <div class="seg ink" style="left:0; width:58.13%; background:var(--seg-full)">full service $2,250</div>
+      <div class="seg last" style="left:58.13%; width:0.80%; background:var(--seg-import)"></div>
+      <div class="saved" style="left:58.93%; width:41.07%">saved $1,590 · 41%</div></div>
+    <div class="val">$1,590<small>cost $2,281</small></div></div>
+
+  <div class="row"><div class="who"><span class="name">Claude Fable 5</span><br><span class="tag">Fine-art rolled · paid</span></div>
+    <div class="track"><div class="grid" style="left:25.83%"></div><div class="grid" style="left:51.67%"></div><div class="grid" style="left:77.5%"></div>
+      <div class="seg ink" style="left:0; width:58.13%; background:var(--seg-full)">full service $2,250</div>
+      <div class="seg ink" style="left:58.13%; width:11.39%; background:var(--seg-restretch)">$441</div>
+      <div class="seg last" style="left:69.52%; width:0.80%; background:var(--seg-import)"></div>
+      <div class="saved" style="left:70.32%; width:29.68%">saved $1,149 · 30%</div></div>
+    <div class="val">$1,149<small>cost $2,722</small></div></div>
+
+  <div class="row"><div class="who"><span class="name">Claude Opus 5</span><br><span class="tag">Fine-art rolled · requested</span></div>
+    <div class="track"><div class="grid" style="left:25.83%"></div><div class="grid" style="left:51.67%"></div><div class="grid" style="left:77.5%"></div>
+      <div class="seg ink" style="left:0; width:58.13%; background:var(--seg-full)">full service $2,250</div>
+      <div class="seg ink" style="left:58.13%; width:11.39%; background:var(--seg-restretch)">$441</div>
+      <div class="seg last" style="left:69.52%; width:0.80%; background:var(--seg-import)"></div>
+      <div class="saved" style="left:70.32%; width:29.68%">saved $1,149 · 30%</div></div>
+    <div class="val">$1,149<small>cost $2,722</small></div></div>
+
+  <div class="row"><div class="who"><span class="name">Sotheby's</span><br><span class="tag">Original quote · source of truth</span></div>
+    <div class="track"><div class="grid" style="left:25.83%"></div><div class="grid" style="left:51.67%"></div><div class="grid" style="left:77.5%"></div>
+      <div class="seg quotebar" style="left:0; width:100%">the full quote · $3,871 · saves $0</div></div>
+    <div class="val">$0<small>cost $3,871</small></div></div>
+
+  <div class="ticks"><div></div><div class="tickrow">
+    <span style="left:0%">$0</span><span style="left:25.83%">$1,000</span>
+    <span style="left:51.67%">$2,000</span><span style="left:77.5%">$3,000</span>
+    <span style="left:100%">$3,871</span></div><div></div></div>
+
+  <div class="foot">Savings estimates aren’t precise — a route is a handful of decisions, each carrying a range of savings. The three that matter most: (1) rolling the canvas instead of shipping the oversized crate; (2) hiring an on-site packer or task service plus a parcel carrier instead of a fine-art full-service shipper; (3) where the canvas gets re-stretched on arrival. Addison (human) is the actual paid breakdown.</div>
+</div></div>

@@ -1,0 +1,28 @@
+# Harbor merges this file with its generated main-service configuration.
+services:
+  main:
+    depends_on:
+      email:
+        condition: service_healthy
+
+  email:
+    build:
+      context: ../../../primitives/communications
+    environment:
+      COMMUNICATION_CHANNEL: email
+      COMMUNICATION_SEED_PATH: /seed/email.json
+      COMMUNICATION_STATE_PATH: /state/email.json
+    expose:
+      - "8000"
+    volumes:
+      - ../world/communications:/seed:ro
+      - communication-state:/state
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; socket.create_connection(('localhost',8000),timeout=2).close()"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+      start_period: 5s
+
+volumes:
+  communication-state:
